@@ -1,4 +1,4 @@
-﻿namespace Sandbox2;
+﻿namespace Multiplayer;
 
 public class CPacketPlayerPosition : ClientPacket
 {
@@ -16,6 +16,8 @@ public class CPacketPlayerPosition : ClientPacket
 
     public override void Handle(Peer peer)
     {
+#if SERVER
         //Net.Server.Players[peer.ID].PrevCurPosition.Add(Position);
+#endif
     }
 }

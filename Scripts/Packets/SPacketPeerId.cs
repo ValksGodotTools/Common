@@ -1,4 +1,4 @@
-﻿namespace Sandbox2;
+﻿namespace Multiplayer;
 
 public class SPacketPeerId : ServerPacket
 {
@@ -16,7 +16,9 @@ public class SPacketPeerId : ServerPacket
 
     public override void Handle()
     {
+#if CLIENT
         GameMaster.PeerId = Id;
         Net.Client.Log("My client ID is " + GameMaster.PeerId);
+#endif
     }
 }

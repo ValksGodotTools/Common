@@ -1,4 +1,4 @@
-﻿namespace Sandbox2;
+﻿namespace Multiplayer;
 
 public class CPacketPlayerJoin : ClientPacket
 {
@@ -16,8 +16,9 @@ public class CPacketPlayerJoin : ClientPacket
 
     public override void Handle(Peer peer)
     {
-        // A new player has joined the server
-        Net.Server.Log($"Player {Username} (ID = {peer.ID}) joined");
+#if SERVER
+		// A new player has joined the server
+		Net.Server.Log($"Player {Username} (ID = {peer.ID}) joined");
 
         // Add this player to the server
         Net.Server.Players.Add(peer.ID, new ServerPlayerData
@@ -60,5 +61,6 @@ public class CPacketPlayerJoin : ClientPacket
                 }
             }
         }, Net.Server.Peers[peer.ID]);
+#endif
     }
 }

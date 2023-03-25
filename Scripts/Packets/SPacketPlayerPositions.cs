@@ -1,4 +1,4 @@
-﻿namespace Sandbox2;
+﻿namespace Multiplayer;
 
 public class SPacketPlayerPositions : ServerPacket
 {
@@ -26,11 +26,14 @@ public class SPacketPlayerPositions : ServerPacket
         }
     }
 
+
     public override void Handle()
     {
+#if CLIENT
         foreach (var playerPos in PlayerPositions)
         {
             GameMaster.UpdatePlayerPosition(playerPos.Key, playerPos.Value);
         }
-    }
+#endif
+	}
 }

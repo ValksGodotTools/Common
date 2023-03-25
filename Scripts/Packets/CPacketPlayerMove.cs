@@ -1,4 +1,4 @@
-﻿namespace Sandbox2;
+﻿namespace Multiplayer;
 
 public class CPacketPlayerMove : ClientPacket
 {
@@ -19,7 +19,8 @@ public class CPacketPlayerMove : ClientPacket
 
     public override void Handle(Peer peer)
     {
-        var player = Net.Server.Players[peer.ID];
+#if SERVER
+		var player = Net.Server.Players[peer.ID];
         var dir = player.Direction;
         
         if (Horizontal == Direction.Left)
@@ -37,5 +38,6 @@ public class CPacketPlayerMove : ClientPacket
             dir.Y = 0;
 
         player.Direction = dir;
+#endif
     }
 }

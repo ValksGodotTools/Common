@@ -1,4 +1,4 @@
-﻿namespace Sandbox2;
+﻿namespace Multiplayer;
 
 public class SPacketPlayerJoinLeaves : ServerPacket
 {
@@ -50,6 +50,7 @@ public class SPacketPlayerJoinLeaves : ServerPacket
 
     public override void Handle()
     {
+#if CLIENT
         foreach (var player in Data)
         {
             var id = player.Key;
@@ -64,6 +65,7 @@ public class SPacketPlayerJoinLeaves : ServerPacket
                 GameMaster.RemovePlayer(id);
             }
         }
+#endif
     }
 }
 
